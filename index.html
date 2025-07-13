@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Litros de Gasolina</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #eee;
+      border-bottom: 1px solid #ccc;
+    }
+    nav button {
+      background: none;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    nav button:hover {
+      background-color: #ddd;
+    }
+    .aba {
+      display: none;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .ativa {
+      display: block;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button.calc {
+      background: #28a745;
+      color: white;
+      border: none;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    button.calc:hover {
+      background: #218838;
+    }
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e2f0d9;
+      border-radius: 5px;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      margin-bottom: 20px;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Calculadora de Litros de Gasolina</h1>
+  </header>
+  <nav>
+    <button onclick="mostrarAba('calculadora')">Calculadora</button>
+    <button onclick="mostrarAba('informacoes')">Informações</button>
+    <button onclick="mostrarAba('videos')">Vídeos</button>
+    <button onclick="mostrarAba('tecnica')">Base Técnica</button>
+    <button onclick="mostrarAba('comentarios')">Comentários</button>
+    <button onclick="mostrarAba('postos')">Postos Próximos</button>
+  </nav>
+  <div id="calculadora" class="aba ativa">
+    <label for="valorReais">Quanto você tem (R$):</label>
+    <input type="number" id="valorReais" placeholder="Ex: 50.00" step="0.01" />
+    <label for="precoLitro">Preço do litro da gasolina (R$):</label>
+    <input type="number" id="precoLitro" placeholder="Ex: 6.59" step="0.01" />
+    <label for="marca">Marca do posto (opcional):</label>
+    <select id="marca">
+      <option value="">-- Selecione --</option>
+      <option value="Shell">Shell</option>
+      <option value="Ipiranga">Ipiranga</option>
+      <option value="Petrobras">Petrobras</option>
+      <option value="Ali">Ali</option>
+      <option value="Rio Branco">Rio Branco</option>
+      <option value="Texaco">Texaco</option>
+      <option value="Esso">Esso</option>
+      <option value="Chevron">Chevron</option>
+      <option value="Gulf">Gulf</option>
+      <option value="TotalEnergies">TotalEnergies</option>
+      <option value="ExxonMobil">ExxonMobil</option>
+      <option value="BR Mania">BR Mania</option>
+      <option value="Posto 6">Posto 6</option>
+      <option value="Outros">Outros</option>
+    </select>
+    <button class="calc" onclick="calcularLitros()">Calcular</button>
+    <div id="resultado"></div>
+  </div>
+  <div id="informacoes" class="aba">
+    <h2>Informações Úteis</h2>
+    <p>Abastecer por litro pode aumentar a transparência da transação e ajudar o consumidor a identificar desvios ou fraudes com maior facilidade.</p>
+    <p>Fontes confiáveis abordam essa discussão:</p>
+    <ul>
+      <li><a href="https://www.boatos.org/brasil/abastecer-gasolina-por-litro-e-nao-por-dinheiro-evita-fraude-em-bombas-de-combustiveis-em-postos.html" target="_blank">Boatos.org - Explicação sobre mitos e verdades do abastecimento por litro</a></li>
+      <li><a href="https://revistaautoesporte.globo.com/Servicos/noticia/2019/07/abastecer-por-litro-ou-por-valor-descubra-qual-e-o-melhor.html" target="_blank">Auto Esporte - Abastecer por litro ou por valor: qual é o melhor?</a></li>
+      <li><a href="https://www.youtube.com/watch?v=VfB7FYqWJ4I" target="_blank">YouTube Canal Mecânica Fácil - Teste prático de abastecimento</a></li>
+      <li><a href="https://jornaldocarro.estadao.com.br/servicos/abastecer-por-litros-ou-reais-qual-forma-e-melhor/" target="_blank">Jornal do Carro - Estadão</a></li>
+    </ul>
+  </div>
+  <div id="videos" class="aba">
+    <h2>Vídeos Explicativos</h2>
+    <p>Veja diferentes vídeos explicando a diferença entre abastecer por reais ou por litros:</p>
+    <iframe src="https://www.youtube.com/embed/guz5mS9JOnA" allowfullscreen title="Vídeo 1"></iframe>
+    <iframe src="https://www.youtube.com/embed/ybG0HbWJmyE" allowfullscreen title="Vídeo 2"></iframe>
+    <iframe src="https://www.youtube.com/embed/YUQK08YblAY" allowfullscreen title="Vídeo 3"></iframe>
+    <iframe src="https://www.youtube.com/embed/qnIJJtYhZ0E" allowfullscreen title="Vídeo 4"></iframe>
+  </div>
+  <div id="tecnica" class="aba">
+    <h2>Base Técnica</h2>
+    <p>As bombas de combustível modernas seguem normas rígidas da ANP. Elas são calibradas para fornecer a quantidade correta, seja por litro ou por valor.</p>
+    <ul>
+      <li><a href="https://www.gov.br/anp/pt-br" target="_blank">Site oficial da ANP</a></li>
+      <li>Resoluções técnicas sobre fiscalização de combustíveis.</li>
+    </ul>
+  </div>
+  <div id="comentarios" class="aba">
+    <h2>Comentários e Avaliação</h2>
+    <p>Você usou nossa calculadora? Deixe sua opinião abaixo:</p>
+    <textarea rows="5" style="width: 100%;"></textarea>
+    <button style="margin-top:10px; background:#007bff; color:white;">Enviar comentário</button>
+  </div>
+  <div id="postos" class="aba">
+    <h2>Postos Próximos (em tempo real)</h2>
+    <p>Confira no mapa os postos de gasolina mais próximos da sua localização atual:</p>
+    <div id="map">Carregando mapa...</div>
+  </div>
+  <script>
+    function mostrarAba(id) {
+      const abas = document.querySelectorAll('.aba');
+      abas.forEach(aba => aba.classList.remove('ativa'));
+      document.getElementById(id).classList.add('ativa');
+    }
+    function calcularLitros() {
+      const valor = parseFloat(document.getElementById('valorReais').value);
+      const preco = parseFloat(document.getElementById('precoLitro').value);
+      const marca = document.getElementById('marca').value;
+      const resultado = document.getElementById('resultado');
+      if (isNaN(valor) || isNaN(preco) || preco <= 0) {
+        resultado.innerHTML = "Por favor, preencha corretamente os campos.";
+        return;
+      }
+      const litros = valor / preco;
+      resultado.innerHTML = `Você poderá abastecer aproximadamente <strong>${litros.toFixed(2)} litros</strong>${marca ? ` no posto ${marca}` : ''}.`;
+    }
+    function carregarMapa() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const mapFrame = document.getElementById("map");
+          const url = `https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=postos+de+gasolina+perto+de+mim&center=${lat},${lon}&zoom=14`;
+          mapFrame.innerHTML = `<iframe width="100%" height="400" frameborder="0" style="border:0" allowfullscreen src="${url}"></iframe>`;
+        }, () => {
+          document.getElementById("map").innerText = "Não foi possível obter sua localização.";
+        });
+      } else {
+        document.getElementById("map").innerText = "Geolocalização não suportada neste navegador.";
+      }
+    }
+    document.querySelector("button[onclick=\"mostrarAba('postos')\"]").addEventListener("click", carregarMapa);
+  </script>
+</body>
+</html>
